@@ -1,13 +1,14 @@
-
 import { useState } from "react";
 import { Search, MapPin, Filter } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { GoogleMapsLocationInput } from "./GoogleMapsLocationInput";
 
 export function SearchPhotographers() {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
+  const [location, setLocation] = useState("");
 
   // Remove photographer listings
   const photographers: any[] = [];
@@ -42,8 +43,12 @@ export function SearchPhotographers() {
               />
             </div>
             <div className="flex items-center space-x-2">
-              <MapPin className="h-4 w-4 text-green-400" />
-              <Input placeholder="Location" className="w-32 bg-background border-green-400/30" />
+              {/* Replace with Google Maps location input */}
+              <GoogleMapsLocationInput
+                value={location}
+                onChange={setLocation}
+                placeholder="Enter location"
+              />
             </div>
             <Button variant="outline" className="border-green-400/30 hover:bg-green-400/10">
               <Filter className="h-4 w-4 mr-2" />
