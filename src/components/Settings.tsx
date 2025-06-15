@@ -48,6 +48,8 @@ export function Settings() {
     location: "",
   });
   const [imageUploading, setImageUploading] = useState(false);
+  // cache-busting param state
+  const [imageCacheBuster, setImageCacheBuster] = useState<string>("");
 
   // Initialize form state on profile load
   useEffect(() => {
@@ -58,6 +60,7 @@ export function Settings() {
         phone: profile.phone || "",
         location: profile.location || "",
       });
+      setImageCacheBuster(""); // reset cache buster when profile is reloaded
     }
   }, [profile?.user_id]);
 
@@ -79,6 +82,7 @@ export function Settings() {
       await saveProfile({ profile_image_url: url });
       toast({ title: "Profile image updated!" });
       await refetch();
+      setImageCacheBuster(`?t=${Date.now()}`); // bump cache buster
     } catch (err: any) {
       toast({ title: "Upload failed", description: err.message, variant: "destructive" });
     }
@@ -95,6 +99,7 @@ export function Settings() {
       await saveProfile({ profile_image_url: null });
       toast({ title: "Profile image removed." });
       await refetch();
+      setImageCacheBuster(`?t=${Date.now()}`); // bump cache for fallback
     } catch (err: any) {
       toast({ title: "Delete failed", description: err.message, variant: "destructive" });
     }
@@ -139,7 +144,7 @@ export function Settings() {
         <CardContent className="space-y-6">
           <div className="flex items-center space-x-6">
             <Avatar className="w-20 h-20">
-              <AvatarImage src={profile?.profile_image_url ?? "/api/placeholder/80/80"} />
+              <AvatarImage src={profile?.profile_image_url ? profile.profile_image_url + imageCacheBuster : "/api/placeholder/80/80"} />
               <AvatarFallback>
                 {profile?.name
                   ? profile.name.split(" ").map(n => n[0]).join("").slice(0,2).toUpperCase()
