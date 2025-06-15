@@ -1,3 +1,4 @@
+import { supabase } from "@/integrations/supabase/client";
 import { useState } from "react";
 import { Camera, Search, MessageCircle, Image, Calendar, Settings, Menu, X, Home } from "lucide-react";
 import { Button } from "@/components/ui/button";

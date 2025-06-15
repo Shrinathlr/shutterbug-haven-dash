@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { Sidebar } from "@/components/Sidebar";
 import { Dashboard } from "@/components/Dashboard";
@@ -6,7 +7,8 @@ import { ChatInterface } from "@/components/ChatInterface";
 import { PhotoGallery } from "@/components/PhotoGallery";
 import { BookingHistory } from "@/components/BookingHistory";
 import { Settings } from "@/components/Settings";
-import { supabase } from "@/lib/supabase";
+// FIX: correct import path for supabase
+import { supabase } from "@/integrations/supabase/client";
 
 const Index = () => {
   const [activeSection, setActiveSection] = useState("dashboard");
