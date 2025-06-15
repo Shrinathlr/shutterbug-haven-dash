@@ -7,57 +7,36 @@ export function Dashboard() {
   const stats = [
     {
       title: "Total Bookings",
-      value: "24",
-      change: "+12%",
+      value: "0",
+      change: "+0%",
       icon: Calendar,
       color: "text-green-400",
     },
     {
       title: "Photos Delivered",
-      value: "156",
-      change: "+8%",
+      value: "0",
+      change: "+0%",
       icon: Camera,
       color: "text-blue-400",
     },
     {
       title: "Total Spent",
-      value: "$2,450",
-      change: "+15%",
+      value: "$0",
+      change: "+0%",
       icon: DollarSign,
       color: "text-green-400",
     },
     {
       title: "Avg Rating",
-      value: "4.8",
-      change: "+0.2",
+      value: "0",
+      change: "+0",
       icon: Star,
       color: "text-yellow-400",
     },
   ];
 
-  const recentBookings = [
-    {
-      photographer: "Sarah Johnson",
-      date: "Dec 15, 2024",
-      service: "Wedding Photography",
-      status: "Confirmed",
-      price: "$800",
-    },
-    {
-      photographer: "Mike Chen",
-      date: "Dec 20, 2024",
-      service: "Portrait Session",
-      status: "Pending",
-      price: "$200",
-    },
-    {
-      photographer: "Emma Wilson",
-      date: "Dec 22, 2024",
-      service: "Event Photography",
-      status: "Completed",
-      price: "$450",
-    },
-  ];
+  // Empty recent bookings
+  const recentBookings: any[] = [];
 
   return (
     <div className="p-6 space-y-6">
@@ -100,27 +79,9 @@ export function Dashboard() {
             <CardDescription>Your latest photography sessions</CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
-            {recentBookings.map((booking, index) => (
-              <div key={index} className="flex items-center justify-between p-3 rounded-lg bg-muted/30 hover:bg-muted/50 transition-colors">
-                <div className="flex-1">
-                  <h4 className="font-medium text-foreground">{booking.photographer}</h4>
-                  <p className="text-sm text-muted-foreground">{booking.service}</p>
-                  <p className="text-xs text-muted-foreground">{booking.date}</p>
-                </div>
-                <div className="text-right">
-                  <p className="font-semibold text-green-400">{booking.price}</p>
-                  <span className={`text-xs px-2 py-1 rounded-full ${
-                    booking.status === "Confirmed" 
-                      ? "bg-green-900/30 text-green-400" 
-                      : booking.status === "Pending"
-                      ? "bg-yellow-900/30 text-yellow-400"
-                      : "bg-blue-900/30 text-blue-400"
-                  }`}>
-                    {booking.status}
-                  </span>
-                </div>
-              </div>
-            ))}
+            {recentBookings.length === 0 ? (
+              <div className="text-muted-foreground text-center py-8">No recent bookings yet.</div>
+            ) : null}
           </CardContent>
         </Card>
 

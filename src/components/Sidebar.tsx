@@ -39,16 +39,10 @@ export function Sidebar({ activeSection, setActiveSection }: SidebarProps) {
       >
         <div className="flex flex-col h-full">
           {/* Logo */}
-          <div className="p-6 border-b border-sidebar-border">
-            <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 rounded-xl photography-gradient flex items-center justify-center">
-                <Camera className="w-6 h-6 text-white" />
-              </div>
-              <div>
-                <h1 className="text-xl font-bold text-sidebar-foreground">PhotoBook</h1>
-                <p className="text-sm text-muted-foreground">Professional Photography</p>
-              </div>
-            </div>
+          <div className="p-8 border-b border-sidebar-border flex flex-col items-center">
+            <img src="/lovable-uploads/629ff1a0-3d1a-43a1-96d9-ebbc51d02972.png" alt="Logo" className="w-24 h-24 object-contain mb-2" />
+            <h1 className="text-xl font-bold text-sidebar-foreground text-center">Reels Studio</h1>
+            <p className="text-sm text-muted-foreground text-center">Professional Photography</p>
           </div>
 
           {/* Navigation */}
