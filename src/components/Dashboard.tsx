@@ -1,9 +1,11 @@
-
 import { Calendar, Camera, DollarSign, Star, TrendingUp, Clock } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { useCurrentUserProfile } from "@/hooks/useCurrentUserProfile";
 
 export function Dashboard() {
+  const { profile, loading } = useCurrentUserProfile();
+
   const stats = [
     {
       title: "Total Bookings",
@@ -42,7 +44,11 @@ export function Dashboard() {
     <div className="p-6 space-y-6">
       {/* Header */}
       <div className="animate-slide-up">
-        <h1 className="text-3xl font-bold text-foreground mb-2">Welcome back, John!</h1>
+        <h1 className="text-3xl font-bold text-foreground mb-2">
+          {loading
+            ? "Welcome back..."
+            : `Welcome back, ${profile?.name ? profile.name : "User"}!`}
+        </h1>
         <p className="text-muted-foreground">Here's what's happening with your photography bookings.</p>
       </div>
 
