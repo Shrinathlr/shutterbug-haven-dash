@@ -1,7 +1,10 @@
+
 import { supabase } from "@/integrations/supabase/client";
 import { useState } from "react";
 import { Camera, Search, MessageCircle, Image, Calendar, Settings, Menu, X, Home } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { useCurrentUserProfile } from "@/hooks/useCurrentUserProfile";
 
 interface SidebarProps {
   activeSection: string;
@@ -10,6 +13,9 @@ interface SidebarProps {
 
 export function Sidebar({ activeSection, setActiveSection }: SidebarProps) {
   const [isOpen, setIsOpen] = useState(false);
+
+  // Use real user profile
+  const { profile } = useCurrentUserProfile();
 
   // Logout button logic
   const handleLogout = async () => {
@@ -25,6 +31,11 @@ export function Sidebar({ activeSection, setActiveSection }: SidebarProps) {
     { id: "bookings", icon: Calendar, label: "Bookings" },
     { id: "settings", icon: Settings, label: "Settings" },
   ];
+
+  // Prepare initials fallback
+  const userInitials = profile?.name
+    ? profile.name.split(" ").map(n => n[0]).join("").slice(0, 2).toUpperCase()
+    : "JD";
 
   return (
     <>
@@ -72,15 +83,20 @@ export function Sidebar({ activeSection, setActiveSection }: SidebarProps) {
             ))}
           </nav>
 
-          {/* User Profile */}
+          {/* User Profile (NOW dynamic) */}
           <div className="p-4 border-t border-sidebar-border">
             <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 rounded-full bg-gradient-to-r from-green-400 to-green-600 flex items-center justify-center">
-                <span className="text-white font-semibold">JD</span>
-              </div>
+              <Avatar className="w-10 h-10">
+                <AvatarImage src={profile?.profile_image_url || undefined} />
+                <AvatarFallback>{userInitials}</AvatarFallback>
+              </Avatar>
               <div className="flex-1">
-                <p className="text-sm font-medium text-sidebar-foreground">John Doe</p>
-                <p className="text-xs text-muted-foreground">john@example.com</p>
+                <p className="text-sm font-medium text-sidebar-foreground">
+                  {profile?.name ? profile.name : "User"}
+                </p>
+                <p className="text-xs text-muted-foreground">
+                  {profile?.email ? profile.email : ""}
+                </p>
               </div>
             </div>
             <Button
@@ -104,3 +120,4 @@ export function Sidebar({ activeSection, setActiveSection }: SidebarProps) {
     </>
   );
 }
+
