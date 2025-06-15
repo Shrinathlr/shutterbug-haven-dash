@@ -9,195 +9,101 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      bookings: {
+      bank_details: {
         Row: {
-          client_email: string | null
-          client_id: string
-          client_name: string | null
-          created_at: string | null
-          date: string | null
+          account_number: string | null
+          created_at: string
           id: string
-          message: string | null
-          notes: string | null
-          photographer_id: string | null
-          session_type: string | null
-          status: string | null
-          time: string | null
-          total_cost: number | null
+          ifsc_code: string | null
         }
         Insert: {
-          client_email?: string | null
-          client_id?: string
-          client_name?: string | null
-          created_at?: string | null
-          date?: string | null
+          account_number?: string | null
+          created_at?: string
           id?: string
-          message?: string | null
-          notes?: string | null
-          photographer_id?: string | null
-          session_type?: string | null
-          status?: string | null
-          time?: string | null
-          total_cost?: number | null
+          ifsc_code?: string | null
         }
         Update: {
-          client_email?: string | null
-          client_id?: string
-          client_name?: string | null
-          created_at?: string | null
-          date?: string | null
+          account_number?: string | null
+          created_at?: string
           id?: string
-          message?: string | null
-          notes?: string | null
-          photographer_id?: string | null
-          session_type?: string | null
-          status?: string | null
-          time?: string | null
-          total_cost?: number | null
+          ifsc_code?: string | null
         }
         Relationships: []
       }
-      photographers: {
+      customer_requests: {
         Row: {
-          availability: Json | null
-          bio: string | null
-          created_at: string
-          hourly_rate: number | null
-          id: number
-          is_approved: boolean | null
-          location: string | null
-          name: string | null
-          profile_image_url: string | null
-          specialties: string[] | null
-          user_id: string | null
+          created_at: string | null
+          customer_id: string
+          details: string | null
+          event_date: string | null
+          event_type: string
+          id: string
+          photographer_id: string
         }
         Insert: {
-          availability?: Json | null
-          bio?: string | null
-          created_at?: string
-          hourly_rate?: number | null
-          id?: number
-          is_approved?: boolean | null
-          location?: string | null
-          name?: string | null
-          profile_image_url?: string | null
-          specialties?: string[] | null
-          user_id?: string | null
+          created_at?: string | null
+          customer_id: string
+          details?: string | null
+          event_date?: string | null
+          event_type: string
+          id?: string
+          photographer_id: string
         }
         Update: {
-          availability?: Json | null
-          bio?: string | null
-          created_at?: string
-          hourly_rate?: number | null
-          id?: number
-          is_approved?: boolean | null
-          location?: string | null
-          name?: string | null
-          profile_image_url?: string | null
-          specialties?: string[] | null
-          user_id?: string | null
+          created_at?: string | null
+          customer_id?: string
+          details?: string | null
+          event_date?: string | null
+          event_type?: string
+          id?: string
+          photographer_id?: string
         }
-        Relationships: []
-      }
-      photos: {
-        Row: {
-          category: string | null
-          created_at: string
-          description: string | null
-          id: number
-          title: string | null
-          url: string | null
-          user_id: string | null
-        }
-        Insert: {
-          category?: string | null
-          created_at?: string
-          description?: string | null
-          id?: number
-          title?: string | null
-          url?: string | null
-          user_id?: string | null
-        }
-        Update: {
-          category?: string | null
-          created_at?: string
-          description?: string | null
-          id?: number
-          title?: string | null
-          url?: string | null
-          user_id?: string | null
-        }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "customer_requests_photographer_id_fkey"
+            columns: ["photographer_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       profiles: {
         Row: {
+          bio: string | null
           created_at: string | null
-          first_name: string | null
+          email: string | null
+          full_name: string | null
           id: string
-          last_name: string | null
-          phone: string | null
-          updated_at: string | null
+          kyc_doc_url: string | null
+          kyc_status: string | null
+          location: string | null
+          onboarded: boolean | null
+          profile_photo_url: string | null
         }
         Insert: {
+          bio?: string | null
           created_at?: string | null
-          first_name?: string | null
+          email?: string | null
+          full_name?: string | null
           id: string
-          last_name?: string | null
-          phone?: string | null
-          updated_at?: string | null
+          kyc_doc_url?: string | null
+          kyc_status?: string | null
+          location?: string | null
+          onboarded?: boolean | null
+          profile_photo_url?: string | null
         }
         Update: {
+          bio?: string | null
           created_at?: string | null
-          first_name?: string | null
+          email?: string | null
+          full_name?: string | null
           id?: string
-          last_name?: string | null
-          phone?: string | null
-          updated_at?: string | null
-        }
-        Relationships: []
-      }
-      user_roles: {
-        Row: {
-          created_at: string | null
-          id: string
-          role: string
-          user_id: string
-        }
-        Insert: {
-          created_at?: string | null
-          id?: string
-          role: string
-          user_id: string
-        }
-        Update: {
-          created_at?: string | null
-          id?: string
-          role?: string
-          user_id?: string
-        }
-        Relationships: []
-      }
-      users: {
-        Row: {
-          created_at: string | null
-          email: string
-          id: string
-          name: string | null
-          role: string | null
-        }
-        Insert: {
-          created_at?: string | null
-          email?: string
-          id?: string
-          name?: string | null
-          role?: string | null
-        }
-        Update: {
-          created_at?: string | null
-          email?: string
-          id?: string
-          name?: string | null
-          role?: string | null
+          kyc_doc_url?: string | null
+          kyc_status?: string | null
+          location?: string | null
+          onboarded?: boolean | null
+          profile_photo_url?: string | null
         }
         Relationships: []
       }
@@ -206,14 +112,7 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      get_user_role: {
-        Args: { user_uuid: string }
-        Returns: string
-      }
-      is_admin: {
-        Args: Record<PropertyKey, never>
-        Returns: boolean
-      }
+      [_ in never]: never
     }
     Enums: {
       [_ in never]: never
