@@ -8,7 +8,8 @@ interface GoogleMapsLocationInputProps {
   className?: string;
 }
 
-export const GOOGLE_MAPS_API_KEY = "AIzaSyCAZCAPA7HTEuE3xksnfZvBsDcEQtJ2hmA";
+// Update the Google Maps API key to the new one provided
+export const GOOGLE_MAPS_API_KEY = "AIzaSyAW_mP-uCa1lWWahG6TT6LdjtDsWZYhNsA";
 
 export const GoogleMapsLocationInput: React.FC<GoogleMapsLocationInputProps> = ({
   value,
