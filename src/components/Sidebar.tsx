@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Camera, Search, MessageCircle, Image, Calendar, Settings, Menu, X, Home } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -10,6 +9,12 @@ interface SidebarProps {
 
 export function Sidebar({ activeSection, setActiveSection }: SidebarProps) {
   const [isOpen, setIsOpen] = useState(false);
+
+  // Logout button logic
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
+    window.location.href = "/auth";
+  };
 
   const menuItems = [
     { id: "dashboard", icon: Home, label: "Dashboard" },
@@ -77,6 +82,13 @@ export function Sidebar({ activeSection, setActiveSection }: SidebarProps) {
                 <p className="text-xs text-muted-foreground">john@example.com</p>
               </div>
             </div>
+            <Button
+              className="mt-3 w-full bg-destructive text-white"
+              onClick={handleLogout}
+              size="sm"
+            >
+              Logout
+            </Button>
           </div>
         </div>
       </div>
